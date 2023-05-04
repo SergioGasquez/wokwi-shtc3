@@ -1,0 +1,22 @@
+[package]
+name = "shtc3"
+version = "0.1.0"
+edition = "2021"
+authors = ["Sergio Gasquez Arcos <sergio.gasquez@gmail.com>"]
+readme = "README.md"
+categories = ["wokwi", "custom-chip", "embedded", "esp32"]
+description = """
+Wokwi custom chip for IMC-42670-P.
+"""
+repository = "https://github.com/SergioGasquez/shtc3"
+
+
+[dependencies]
+wokwi_chip_ll = "0.1"
+
+[lib]
+crate-type = ["cdylib"]
+
+[profile.release]
+lto = true
+opt-level = 's'

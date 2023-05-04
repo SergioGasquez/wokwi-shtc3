@@ -1,0 +1,16 @@
+{
+    "name": "SHTC3",
+    "author": "Sergio Gasquez Arcos",
+    "license": "MIT",
+    "version": 1,
+    "pins": [
+        "",
+        "",
+        "",
+        "",
+        "SCL",
+        "SDA",
+        "GND",
+        "VCC"
+    ]
+}

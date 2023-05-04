@@ -1,0 +1,42 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build chip
+    steps:
+      - name: Setup | Rust
+        uses: dtolnay/rust-toolchain@v1
+        with:
+          target: wasm32-unknown-unknown
+          components: clippy, rustfmt
+          toolchain: stable
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - name: Build | Fmt Check
+        run: cargo fmt -- --check
+      - name: Build | Clippy
+        run: cargo clippy --no-deps
+      - name: Build | Compile
+        run: cargo build --release
+      - name: Build | Copy dist files
+        run: |
+          mkdir -p dist
+          cp target/wasm32-unknown-unknown/release/shtc3.wasm dist/chip.wasm
+          cp wokwi-chip.json dist/chip.json
+      - name: "Upload Artifacts"
+        uses: actions/upload-artifact@v3
+        with:
+          name: chip
+          path: dist/*
+
