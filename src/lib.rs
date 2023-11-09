@@ -76,7 +76,7 @@ pub unsafe extern "C" fn chipInit() {
 }
 
 pub unsafe fn on_i2c_connect(user_ctx: *const c_void, address: u32, read: bool) -> bool {
-    let msg: String = format!("on_i2c_connect: address: {}, read: {}", address, read);
+    let msg: String = format!("on_i2c_connect: address: {:#02x}, read: {}", address, read);
     debugPrint(CString::new(msg).unwrap().into_raw());
     let chip: &mut Chip = &mut CHIP_VEC[user_ctx as usize];
     if read {
