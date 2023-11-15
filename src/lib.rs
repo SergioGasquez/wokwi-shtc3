@@ -166,7 +166,7 @@ pub unsafe fn on_i2c_read(user_ctx: *const c_void) -> u8 {
 }
 
 pub unsafe fn on_i2c_write(user_ctx: *const c_void, data: u8) -> bool {
-    let msg = format!("on_i2c_write: data: {}", data);
+    let msg = format!("on_i2c_write: data: {:#02x}", data);
     debugPrint(CString::new(msg).unwrap().into_raw());
 
     let chip: &mut Chip = &mut CHIP_VEC[user_ctx as usize];
